@@ -46,22 +46,25 @@
     <script>
         $(document).ready(function() {
             $('#submit').click(function() {
-                //send image at field "image" to server json
+                $('#result').text('Loading...');
                 var form_data = new FormData();
                 var image = $('#image')[0].files[0];
                 form_data.append('image', image);
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost:5000/image',
+                    url: 'https://server-emotions.onrender.com/image',
                     data: form_data,
                     processData: false,
                     contentType: false,
                     cache: false,
                     processData: false,
-                    async: false,
+                    async: true,
                     success: function(data) {
-                        $('#result').text(data.emotion);
+                        $('#result').text(data.emotion.charAt(0).toUpperCase() + data.emotion.slice(1));
                     },
+                    error: function(data) {
+                        $('#result').text('Error');
+                    }
                 });
             });
         });
