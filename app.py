@@ -31,6 +31,5 @@ def image():
     emotion = get_emotion(image)
     return jsonify({'emotion': emotion})
 
-
 if __name__ == '__main__':
     app.run()
